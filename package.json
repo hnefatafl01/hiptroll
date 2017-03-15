@@ -40,6 +40,6 @@
     "knex": "^0.12.6",
     "moment": "^2.17.1",
     "pg": "^6.1.2",
-    "webdriver-manager": "^12.0.4"
+    "webdriver-manager": "^10.2.8"
   }
 }

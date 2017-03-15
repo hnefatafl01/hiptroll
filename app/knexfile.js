@@ -1,17 +1,25 @@
+require('dotenv').config()
+
 module.exports = {
 
   development: {
     client: 'pg',
     connection: {
-      database: process.env.DATABASE_URL || 'reddit-clone',
+      database: 'reddit-clone',
     }
   },
 
-  test: {
+  production: {
     client: 'pg',
-    connection: {
-      database: process.env.DATABASE_URL || 'reddit-clone-test',
-    }
-  }
+    connection: process.env.DATABASE_URL + '?ssl=true',
+
+  },
+
+  // test: {
+  //   client: 'pg',
+  //   connection: {
+  //     database: process.env.DATABASE_URL || 'reddit-clone-test',
+  //   }
+  // }
 
 };

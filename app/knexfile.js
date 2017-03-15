@@ -4,9 +4,7 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: {
-      database: 'reddit-clone',
-    }
+    connection: 'postgrs://reddit-clone'
   },
 
   production: {

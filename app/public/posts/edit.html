@@ -1,0 +1,82 @@
+<main class="container">
+  <div class="row">
+    <div class="col-md-8" ng-if="$ctrl.show == true" >
+
+      <form ng-submit="$ctrl.updatePost($event, post)" name="$ctrl.editForm" novalidate>
+        <h1>{{$ctrl.editPost.title}}</h1>
+        <div ng-class="{ 'has-warning' : $ctrl.editForm.title.$touched && $ctrl.editForm.title.$invalid}">
+          <label for="title">Title</label>
+          <input
+            id="title"
+            name="title"
+            class="form-control"
+            ng-model="$ctrl.editPost.title"
+            ng-minlength="3"
+            ng-maxlength="20"
+            required>
+            <div class="text-warning" ng-messages="$ctrl.editForm.title.$error" ng-if="$ctrl.editForm.title.$touched">
+              <p ng-message="minlength">Your title is too short.</p>
+              <p ng-message="maxlength">Your title is too long.</p>
+              <p ng-message="required">Your title is required.</p>
+            </div>
+        </div>
+
+        <div ng-class="{ 'has-warning' : $ctrl.editForm.body.$touched && $ctrl.editForm.body.$invalid}">
+          <label for="body">Body</label>
+          <textarea
+            id="body"
+            class="form-control"
+            name="body"
+            ng-model="$ctrl.editPost.body"
+            ng-minlength="3"
+            ng-maxlength="1000"
+            required></textarea>
+            <div class="text-warning" ng-messages="$ctrl.editForm.body.$error" ng-if="$ctrl.editForm.body.$touched">
+              <p ng-message="minlength">Your post body is too short.</p>
+              <p ng-message="maxlength">Your post body is too long.</p>
+              <p ng-message="required">Your post body is required.</p>
+            </div>
+        </div>
+        <div ng-class="{ 'has-warning' : $ctrl.editForm.author.$touched && $ctrl.editForm.author.$invalid}">
+          <label for="author">Author</label>
+          <input
+            id="author"
+            class="form-control"
+            name="author"
+            ng-model="$ctrl.editPost.author"
+            ng-minlength="3"
+            ng-maxlength="20"
+            required>
+            <div class="text-warning" ng-messages="$ctrl.editForm.author.$error" ng-if="$ctrl.editForm.author.$touched">
+              <p ng-message="minlength">Your author name is too short.</p>
+              <p ng-message="maxlength">Your author name is too long.</p>
+              <p ng-message="required">Your author name is required.</p>
+            </div>
+        </div>
+        <div ng-class="{ 'has-warning' : $ctrl.editForm.image_url.$touched && $ctrl.editForm.image_url.$invalid}">
+          <label for="image-url">Image URL</label>
+          <input
+            id="image-url"
+            class="form-control"
+            name="imageUrl"
+            ng-model="$ctrl.editPost.image_url"
+            ng-minlength="6"
+            ng-maxlength="200"
+            required>
+            <div class="text-warning" ng-messages="$ctrl.editForm.imageUrl.$error" ng-if="$ctrl.editForm.image_url.$touched">
+              <p ng-message="minlength">Your image url is too short.</p>
+              <p ng-message="maxlength">Your image url is too long.</p>
+              <p ng-message="required">Your image url is required.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.editForm.$invalid">
+            Update Post
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</main>

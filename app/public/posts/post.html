@@ -1,0 +1,139 @@
+<main class="container">
+
+  <div class="pull-right">
+    <p><a ng-click="$ctrl.showNewPost()" class="btn btn-info">New Post</a></p>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active">
+      <input ng-model="$ctrl.search" type="search" class="form-control input-sm search-form" placeholder="Filter" >
+    </li>
+    <li class="dropdown" uib-dropdown>
+      <a uib-dropdown-toggle ng-click="$ctrl.toggleDropdown()"
+        href="#"
+        class="dropdown-toggle"
+        data-toggle="dropdown"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded="false">Sort By {{$ctrl.filterBy}}<span class="caret"></span></a>
+      <ul class="dropdown-menu" uib-dropdown>
+        <li ng-repeat="filter in $ctrl.filters"><a ng-click="$ctrl.selectFilter(filter)">{{filter}}</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="row">
+    <div class="col-md-8" ng-if="$ctrl.show == true" >
+        <form ng-submit="$ctrl.createPost($event, post)" name="$ctrl.postForm" novalidate>
+          <div ng-class="{ 'has-warning' : $ctrl.postForm.title.$touched && $ctrl.postForm.title.$invalid}">
+            <label for="title">Title</label>
+            <input
+              id="title"
+              name="title"
+              class="form-control"
+              ng-model="$ctrl.newPost.title"
+              ng-minlength="3"
+              ng-maxlength="20"
+              required>
+              <div class="text-warning" ng-messages="$ctrl.postForm.title.$error" ng-if="$ctrl.postForm.title.$touched">
+                <p ng-message="minlength">Your title is too short.</p>
+                <p ng-message="maxlength">Your title is too long.</p>
+                <p ng-message="required">Your title is required.</p>
+              </div>
+          </div>
+
+          <div ng-class="{ 'has-warning' : $ctrl.postForm.body.$touched && $ctrl.postForm.body.$invalid}">
+            <label for="body">Body</label>
+            <textarea
+              id="body"
+              class="form-control"
+              name="body"
+              ng-model="$ctrl.newPost.body"
+              ng-minlength="3"
+              ng-maxlength="1000"
+              required></textarea>
+              <div class="text-warning" ng-messages="$ctrl.postForm.body.$error" ng-if="$ctrl.postForm.body.$touched">
+                <p ng-message="minlength">Your post body is too short.</p>
+                <p ng-message="maxlength">Your post body is too long.</p>
+                <p ng-message="required">Your post body is required.</p>
+              </div>
+          </div>
+          <div ng-class="{ 'has-warning' : $ctrl.postForm.author.$touched && $ctrl.postForm.author.$invalid}">
+            <label for="author">Author</label>
+            <input
+              id="author"
+              class="form-control"
+              name="author"
+              ng-model="$ctrl.newPost.author"
+              ng-minlength="3"
+              ng-maxlength="20"
+              required>
+              <div class="text-warning" ng-messages="$ctrl.postForm.author.$error" ng-if="$ctrl.postForm.author.$touched">
+                <p ng-message="minlength">Your author name is too short.</p>
+                <p ng-message="maxlength">Your author name is too long.</p>
+                <p ng-message="required">Your author name is required.</p>
+              </div>
+
+          </div>
+          <div ng-class="{ 'has-warning' : $ctrl.postForm.imageUrl.$touched && $ctrl.postForm.imageUrl.$invalid}">
+            <label for="image-url">Image URL</label>
+            <input
+              id="image-url"
+              class="form-control"
+              name="imageUrl"
+              ng-model="$ctrl.newPost.imageUrl"
+              ng-minlength="6"
+              ng-maxlength="150"
+              required>
+              <div class="text-warning" ng-messages="$ctrl.postForm.imageUrl.$error" ng-if="$ctrl.postForm.imageUrl.$touched">
+                <p ng-message="minlength">Your image url is too short.</p>
+                <p ng-message="maxlength">Your image url is too long.</p>
+                <p ng-message="required">Your image url is required.</p>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-disabled="$ctrl.postForm.$invalid">
+              Create Post
+            </button>
+          </div>
+        </form>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="well" ng-repeat="post in $ctrl.posts | orderBy:$ctrl.sortFilter | filter:$ctrl.search">
+        <div class="media-left">
+          <img class="media-object" src="{{post.imageUrl}}">
+          <a ui-sref="edit({ id: post.id})">edit</a>
+        </div>
+        <div class="media-body">
+
+          <h4 class="media-heading">
+            {{post.title}}
+            |
+            <a ng-click="$ctrl.addVote(post)"><i class="glyphicon glyphicon-arrow-up"></i></a>
+            <a ng-click="$ctrl.subtractVote(post)"><i class="glyphicon glyphicon-arrow-down"></i></a>
+            {{post.vote_count}}
+            <a ng-click="$ctrl.deletePost(post)" class="pull-right"><span class="glyphicon " ng-class="{ 'glyphicon-remove': true, 'aria-hidden' : true }"></span></a>
+          </h4>
+
+          <div class="text-right">
+            {{post.author}}
+          </div>
+          <p>
+            {{post.body}}
+          </p>
+
+          <comment></comment>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>

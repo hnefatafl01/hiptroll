@@ -9,19 +9,21 @@
 
   controller.$inject = ['postService','$stateParams']
 
-  function controller(postService, $stateParams, $state) {
+  function controller(postService, $stateParams, $state, commentService) {
     const vm = this;
 
     vm.$onInit = function() {
       vm.filters = ['Votes', 'Date', 'Title'];
       vm.sortFilters = ['votes','date','title'];
       vm.show = false;
-      vm.showComment = false;
+      vm.showComment = true;
       vm.status = {
         isopen: false
       };
+
       postService.getPosts().then(function(posts){
         vm.posts = posts;
+        console.log(posts);
       })
     }
 
@@ -42,24 +44,26 @@
           created_at: new Date()
         }
         vm.post = vm.newPost;
-
+        console.log(vm.post);
         postService.makePost(vm.post).then(function(post) {
           vm.post = post;
+          return vm.post;
         })
-        vm.$onInit();
+
         delete vm.post;
         vm.postForm.$setUntouched();
         vm.postForm.$setPristine();
         }
         vm.showNewPost()
-
+        // $state.reload()
     }
 
 
     vm.deletePost = function(post) {
       vm.post = post;
       postService.removePost(vm.post);
-      vm.$onInit();
+      // vm.$onInit();
+      $state.reload()
     }
 
     vm.addVote = function(post) {
@@ -75,7 +79,8 @@
       } else {
         return post.vote_count = 0;
       }
-      vm.$onInit();
+      // vm.$onInit();
+      $state.reload()
     }
 
     vm.toggled = function(open) {

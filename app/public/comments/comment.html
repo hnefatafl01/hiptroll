@@ -7,9 +7,9 @@
   </a>
 </div>
 <div class="row">
-  <div class="col-md-offset-1" ng-if="post.showComment == true">
+  <div class="col-md-offset-1">
     <hr>
-    <p  ng-repeat="comment in post.comments track by $index">
+    <p  ng-repeat="comment in post.comments track by $index" ng-if="$ctrl.showComment == true">
       {{comment.content}}
     </p>
     <form name="post.commentForm" class="form-inline" ng-submit="$ctrl.createComment($event, post)">

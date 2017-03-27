@@ -20,9 +20,10 @@
         component: 'editPost'
       })
       .state({
-        name: 'comment',
-        abstract: true,
-        parent: 'postList',
+        name: 'post.comment',
+        url:'/:id/comments',
+        // abstract: true,
+        // parent: 'postList',
         component: 'commentComponent'
       })
   }

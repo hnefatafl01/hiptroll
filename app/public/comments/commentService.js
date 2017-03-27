@@ -6,12 +6,14 @@
     .service('commentService', service);
 
   function service() {
+
     this.getComments = function(post) {
-      // $http.get(`/api/posts/${post.id}`).then(function(response) {
-        // console.log(response);
-      // })
-    // }
-    console.log('commentService');
+      console.log('hi');
+      console.log(post);
+      return $http.get(`/api/posts/${post.id}`).then(function(response) {
+        console.log(response);
+        return response;
+      })
     }
   }
 

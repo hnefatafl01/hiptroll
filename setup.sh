@@ -7,4 +7,6 @@ createdb reddit-clone-test
 knex migrate:latest --knexfile app/knexfile.js
 knex migrate:latest --env test --knexfile app/knexfile.js
 
-knex seed:run --knexfile app/knexfile.js
+knex migrate:latest --env production --knexfile app/knexfile.js
+
+knex seed:run --knexfile --env production app/knexfile.js

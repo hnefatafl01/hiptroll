@@ -4,13 +4,12 @@ module.exports = {
 
   development: {
     client: 'pg',
-    connection: 'postgrs://reddit-clone'
+    connection: 'postgres://localhost:5000/reddit-clone'
   },
 
   production: {
     client: 'pg',
     connection: process.env.DATABASE_URL + '?ssl=true',
-
   }
 
   // test: {

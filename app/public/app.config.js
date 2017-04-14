@@ -10,13 +10,13 @@
 
     $stateProvider
       .state({
-        name: 'postList',
+        name: 'posts',
         url: '/',
         component: 'post'
       })
       .state({
-        name: 'post.edit',
-        url: '/:id/edit',
+        name: 'edit',
+        url: ':id/edit',
         component: 'editPost'
       })
   }

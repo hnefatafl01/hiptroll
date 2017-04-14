@@ -25,7 +25,6 @@
         postService.getPosts().then(function(posts){
           vm.posts = posts;
         })
-
       }
 
       vm.showNewPost = function() {
@@ -115,17 +114,14 @@
         content: post.comment.content,
         post_id: post.id
       }
-      // console.log(vm.comment);
+
       postService.addComment(vm.comment);
-      // vm.numComments = post.comments.length;
-      // post.comment = '';
-      // delete vm.comment;
+      vm.numComments = post.comments.length;
+      delete vm.comment;
+      $state.go($state.current, {}, {reload: true});
     }
 
     vm.showComments = function(post) {
-      console.log("clicked");
-      // vm.post = post;
-      // console.log(vm.post);
       post.showComment = !post.showComment;
       // postService.getComments(post);
     }

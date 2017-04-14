@@ -51,6 +51,7 @@
       return $http.post(`/api/posts/${comment.post_id}/comments`, comment)
         .then(function(response) {
           console.log(response.data);
+          return response.data;
         })
     }
   }

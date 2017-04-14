@@ -83,7 +83,7 @@
               name="imageUrl"
               ng-model="$ctrl.newPost.imageUrl"
               ng-minlength="6"
-              ng-maxlength="500"
+              ng-maxlength="1000"
               required>
               <div class="text-warning" ng-messages="$ctrl.postForm.imageUrl.$error" ng-if="$ctrl.postForm.imageUrl.$touched">
                 <p ng-message="minlength">Your image url is too short.</p>
@@ -107,9 +107,9 @@
     <div class="col-md-12">
 
       <div class="well" ng-repeat="post in $ctrl.posts | orderBy:$ctrl.sortFilter | filter:$ctrl.search">
-        <div class="media-left">
-          <img style="width:auto; height: 125px;" class="media-object" ng-src="{{post.image_url}}">
-          <a ui-sref="edit({ id: post.id})">edit</a>
+        <div class="media-left text-center">
+          <img style="width:auto; max-height:125px; margin-bottom:15%;" class="media-object" ng-src="{{post.image_url}}">
+          <a  ui-sref="edit({ id: post.id })"><span class="glyphicon glyphicon-edit"></span></a>
         </div>
         <div class="media-body">
 

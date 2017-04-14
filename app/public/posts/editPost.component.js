@@ -37,7 +37,7 @@
       event.preventDefault();
       $http.patch(`/api/posts/${$stateParams.id}`, vm.editPost).then(function(response){
         vm.post = response.data;
-        $state.go('postList');
+        $state.go('posts');
         console.log(response.status);
       }, function(response, error) {
         console.log(response.error)

@@ -22,8 +22,8 @@
         };
 
         postService.getPosts().then(function(posts){
-          vm.posts = posts;
           console.log(posts);
+          vm.posts = posts;
         })
       }
 
@@ -45,7 +45,6 @@
           }
 
           vm.post = vm.newPost;
-          console.log(vm.post);
           let post = vm.post;
           postService.makePost(post).then(function(post) {
             vm.post = post;

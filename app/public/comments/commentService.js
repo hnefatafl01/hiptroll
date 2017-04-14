@@ -3,16 +3,14 @@
 
   angular
     .module('app')
-    .service('commentService', service);
+    .service('CommentService', commentService);
 
-  function service() {
-
+  function commentService($http) {
     this.getComments = function(post) {
-      console.log('hi');
-      console.log(post);
-      return $http.get(`/api/posts/${post.id}`).then(function(response) {
-        console.log(response);
-        return response;
+      // console.log(post);
+      return $http.get(`/api/posts/${post.id}/comments`).then(function(response) {
+        // console.log(response.data);
+        return response.data;
       })
     }
   }

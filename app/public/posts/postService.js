@@ -19,7 +19,8 @@
       })
     }
 
-    this.removePost = function(id, post) {
+    this.removePost = function(post) {
+      console.log(post);
       $http.delete(`/api/posts/${post.id}`, post)
     }
 

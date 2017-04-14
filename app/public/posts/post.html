@@ -129,7 +129,38 @@
             {{post.body}}
           </p>
 
-          <comment></comment>
+          <div>
+            <span am-time-ago="post.created_at"></span>
+            |
+            <i class="glyphicon glyphicon-comment"></i>
+            <a ng-click="$ctrl.showComments(post)">
+              <ng-pluralize count="post.comments.length" when="{ '0': '0 Comments', '1': '{} Comment', 'other': '{} Comments' }"></ng-pluralize>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-offset-1">
+              <hr>
+              <p  ng-repeat="comment in post.comments track by $index" ng-if="post.showComment == true">
+                {{comment.content}}
+              </p>
+              <form name="post.commentForm" class="form-inline" ng-submit="$ctrl.createComment($event, post, $index)">
+                <div class="form-group" ng-class="{ 'has-warning' : post.commentForm.comment.$invalid}">
+                  <input
+                    name="comment"
+                    class="form-control"
+                    ng-model="post.comment.content"
+                    ng-minlength="0"
+                    ng-maxlength="140">
+                  <div class="text-error" ng-messages="post.commentForm.comment.$error" ng-if="post.commentForm.comment.$invalid">
+                    <p ng-message="maxlength">Your comment is too long.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="submit" class="btn btn-primary">
+                </div>
+              </form>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -4,11 +4,6 @@
   angular
     .module('app')
     .service('postService', service)
-    .service('CommentService', commentService);
-
-  function commentService($http) {
-
-  }
 
   function service($http) {
     this.getPosts = function(){
@@ -25,28 +20,38 @@
     }
 
     this.removePost = function(post) {
-      console.log(post);
       $http.delete(`/api/posts/${post.id}`, post)
+        .then(function(response){
+          return response.data;
+        })
     }
 
     this.plusVote = function(post) {
-      $http.post(`/api/posts/${post.id}/votes`, post).then(function(response) {
-        console.log(response);
-      })
+      $http.post(`/api/posts/${post.id}/votes`, post)
+        .then(function(response) {
+          return response.data
+        })
     }
 
     this.minusVote = function(post) {
-      $http.delete(`/api/posts/${post.id}/votes`, post).then(function(response) {
-        console.log(response);
+      $http.delete(`/api/posts/${post.id}/votes`, post)
+        .then(function(response) {
+          return response.data;
       })
     }
 
     this.getComments = function(post) {
-      // console.log(post);
-      return $http.get(`/api/posts/${post.id}/comments`).then(function(response) {
-        console.log(response.data);
-        return response.data;
-      })
+      return $http.get(`/api/posts/${post.id}/comments`)
+        .then(function(response) {
+          return response.data;
+        })
+    }
+
+    this.addComment = function(comment) {
+      return $http.post(`/api/posts/${comment.post_id}/comments`, comment)
+        .then(function(response) {
+          console.log(response.data);
+        })
     }
   }
 }())

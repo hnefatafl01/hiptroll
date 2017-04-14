@@ -19,13 +19,6 @@
         url: '/:id/edit',
         component: 'editPost'
       })
-      .state({
-        name: 'post.comment',
-        url:'/:id/comments',
-        // abstract: true,
-        // parent: 'postList',
-        component: 'commentComponent'
-      })
   }
 
 }());

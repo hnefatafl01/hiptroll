@@ -9,22 +9,23 @@
 
   controller.$inject = ['postService','$stateParams', '$state']
 
-  function controller(postService, $stateParams, $state, commentService) {
+  function controller(postService, $stateParams, $state) {
       const vm = this;
 
       vm.$onInit = function() {
         vm.filters = ['Votes', 'Date', 'Title'];
         vm.sortFilters = ['votes','date','title'];
         vm.show = false;
-        vm.showComment = true;
+        vm.showComment = false;
+
         vm.status = {
           isopen: false
         };
 
         postService.getPosts().then(function(posts){
-          console.log(posts);
           vm.posts = posts;
         })
+
       }
 
       vm.showNewPost = function() {
@@ -105,5 +106,29 @@
           vm.sortFilter;
         }
       }
+
+// comments
+    vm.createComment = function(event, post, $index) {
+      event.preventDefault();
+
+      vm.comment = {
+        content: post.comment.content,
+        post_id: post.id
+      }
+      // console.log(vm.comment);
+      postService.addComment(vm.comment);
+      // vm.numComments = post.comments.length;
+      // post.comment = '';
+      // delete vm.comment;
+    }
+
+    vm.showComments = function(post) {
+      console.log("clicked");
+      // vm.post = post;
+      // console.log(vm.post);
+      post.showComment = !post.showComment;
+      // postService.getComments(post);
+    }
+
   }
 }());

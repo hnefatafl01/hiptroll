@@ -4,6 +4,11 @@
   angular
     .module('app')
     .service('postService', service)
+    .service('CommentService', commentService);
+
+  function commentService($http) {
+
+  }
 
   function service($http) {
     this.getPosts = function(){
@@ -33,6 +38,14 @@
     this.minusVote = function(post) {
       $http.delete(`/api/posts/${post.id}/votes`, post).then(function(response) {
         console.log(response);
+      })
+    }
+
+    this.getComments = function(post) {
+      // console.log(post);
+      return $http.get(`/api/posts/${post.id}/comments`).then(function(response) {
+        console.log(response.data);
+        return response.data;
       })
     }
   }
